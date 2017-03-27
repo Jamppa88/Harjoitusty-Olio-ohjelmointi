@@ -30,6 +30,10 @@ namespace Dnd_Character_Sheet.Models
             AbiBonus[5] = cha;
 
         }
+        public void AddSubrace(Subrace subrace)
+        {
+            Subraces.Add(subrace);
+        }
         public override string ToString()
         {
             return Name;
