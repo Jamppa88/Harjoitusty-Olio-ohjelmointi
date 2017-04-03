@@ -39,9 +39,9 @@ namespace Dnd_Character_Sheet.Views
         {
             // Demo rodut
             List<Race> Races = new List<Race>();
-            Race race = new Race("Human", 1, 1, 1, 1, 1, 1, 30, size.Medium);
+            Race race = new Race("Human", 1, 1, 1, 1, 1, 1, 30, size.Medium, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
             Races.Add(race);
-            race = new Race("Dwarf", 0, 0, 2, 0, 0, 0, 25, size.Medium);
+            race = new Race("Dwarf", 0, 0, 2, 0, 0, 0, 25, size.Medium, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
             race.AddSubrace(new Subrace("Mountain Dwarf", 2, 0, 2, 0, 0, 0));
             race.AddSubrace(new Subrace("Hill Dwarf", 0, 0, 2, 0, 1, 0));
             Races.Add(race);
@@ -55,6 +55,17 @@ namespace Dnd_Character_Sheet.Views
             cls.AddArchetype("Life");
             Classes.Add(cls);
             cmbClass.ItemsSource = Classes;
+            // Demo Backgroundit
+            List<Background> Backgrounds = new List<Background>();
+            Background bck = new Background("Acolyte", false, false, false, false, false, false, true, false,false,false,false,false,false, false, true, false, false, false);
+            Backgrounds.Add(bck);
+            bck = new Background("Criminal", false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, true, false);
+            Backgrounds.Add(bck);
+            cmbBackground.ItemsSource = Backgrounds;
+            // Muut
+            List<alignment> ali = new List<alignment>();
+            ali.Add(alignment.LG); ali.Add(alignment.NG); ali.Add(alignment.CG); ali.Add(alignment.LN); ali.Add(alignment.N); ali.Add(alignment.CN); ali.Add(alignment.LE); ali.Add(alignment.NE); ali.Add(alignment.CE);
+            cmbAlignment.ItemsSource = ali;
         }
         // Primer for function, Selected a Race
         ComboBox cmbSubrace = new ComboBox();
@@ -72,7 +83,7 @@ namespace Dnd_Character_Sheet.Views
                 rpBasicInfo.Children.Add(cmbSubrace);
                 RelativePanel.SetBelow(cmbClass, cmbSubrace);
                 RelativePanel.SetBelow(txtClass, cmbSubrace);
-                
+                SetLanguages(temp);
             }
             else
             {
@@ -80,6 +91,7 @@ namespace Dnd_Character_Sheet.Views
                 RelativePanel.SetBelow(txtClass, txtRace);
                 rpBasicInfo.Children.Remove(cmbSubrace);
                 SetAbilityBonuses(temp);
+                SetLanguages(temp);
             }
                 
            
@@ -204,6 +216,25 @@ namespace Dnd_Character_Sheet.Views
             txbWisRac.Text = race.AbiBonus[4].ToString();
             txbChaRac.Text = race.AbiBonus[5].ToString();
         }
+        private void SetLanguages(Race race)
+        {
+            cbCommon.IsChecked = race.Languages[0];
+            cbDwarwish.IsChecked = race.Languages[1];
+            cbElvish.IsChecked = race.Languages[2];
+            cbGiant.IsChecked = race.Languages[3];
+            cbGnomish.IsChecked = race.Languages[4];
+            cbGoblin.IsChecked = race.Languages[5];
+            cbHalfling.IsChecked = race.Languages[6];
+            cbOrc.IsChecked = race.Languages[7];
+            cbAbyssal.IsChecked = race.Languages[8];
+            cbCelestial.IsChecked = race.Languages[9];
+            cbDraconic.IsChecked = race.Languages[10];
+            cbDeepSpeech.IsChecked = race.Languages[11];
+            cbInfernal.IsChecked = race.Languages[12];
+            cbPrimordial.IsChecked = race.Languages[13];
+            cbSylvan.IsChecked = race.Languages[14];
+            cbUndercommon.IsChecked = race.Languages[15];
+        }
 
         private async void Calc_AbilityScoreTotal(object sender, TextChangedEventArgs e)
         {
@@ -269,6 +300,102 @@ namespace Dnd_Character_Sheet.Views
             } catch 
             {
                 
+            }
+        }
+
+        private void cmbBackground_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Background temp = (Background)cmbBackground.SelectedItem;
+            cbAcrobatics.IsChecked = temp.SkillProf[0];
+            cbAnimalHandling.IsChecked = temp.SkillProf[1];
+            cbArcana.IsChecked = temp.SkillProf[2];
+            cbAthletics.IsChecked = temp.SkillProf[3];
+            cbDeception.IsChecked = temp.SkillProf[4];
+            cbHistory.IsChecked = temp.SkillProf[5];
+            cbInsight.IsChecked = temp.SkillProf[6];
+            cbIntimidation.IsChecked = temp.SkillProf[7];
+            cbInvestigation.IsChecked = temp.SkillProf[8];
+            cbMedicine.IsChecked = temp.SkillProf[9];
+            cbNature.IsChecked = temp.SkillProf[10];
+            cbPerception.IsChecked = temp.SkillProf[11];
+            cbPerformance.IsChecked = temp.SkillProf[12];
+            cbPersuation.IsChecked = temp.SkillProf[13];
+            cbReligion.IsChecked = temp.SkillProf[14];
+            cbSleightOfHand.IsChecked = temp.SkillProf[15];
+            cbStealth.IsChecked = temp.SkillProf[16];
+            cbSurvival.IsChecked = temp.SkillProf[17];
+        }
+
+        private async void bSave_Click(object sender, RoutedEventArgs e)
+        {
+            if (txbCharName.Text == null || txbCharName.Text == "")
+            {
+                var temp = new Windows.UI.Popups.MessageDialog("Enter a Name!!!");
+                await temp.ShowAsync();
+            }
+            else if (cmbRace.SelectedItem == null)
+            {
+                var temp = new Windows.UI.Popups.MessageDialog("Choose a Race!!!");
+                await temp.ShowAsync();
+            }
+            else if (cmbSubclass.SelectedItem == null)
+            {
+                var temp = new Windows.UI.Popups.MessageDialog("Choose a Class!!!");
+                await temp.ShowAsync();
+            }
+            else if (txbHitPoints.Text == null)
+            {
+                var temp = new Windows.UI.Popups.MessageDialog("Determine hit points!!!");
+                await temp.ShowAsync();
+            }
+            else
+            {
+                Character tmp = new Character();
+                tmp.Race = (Race)cmbRace.SelectedItem;
+                tmp.Subrace = (Subrace)cmbSubrace.SelectedItem;
+                tmp.Name = txbCharName.Text;
+                tmp.Class = (Class)cmbClass.SelectedItem;
+                tmp.Archetype = (string)cmbSubclass.SelectedItem;
+                tmp.Background = (Background)cmbBackground.SelectedItem;
+                tmp.Level = int.Parse(txbLevel.Text);
+                tmp.Speed = ((Race)cmbRace.SelectedItem).BaseSpeed;
+                // Set skill profiencies
+                int i = 0;
+                foreach (CheckBox cb in rpSkills.Children.OfType<CheckBox>())
+                {
+                    
+                    tmp.SkillProf[i] = (bool)cb.IsChecked;
+                    i++;
+                }
+                // set ability scores
+                tmp.AbiScore[0] = int.Parse(txbStrTot.Text);
+                tmp.AbiScore[1] = int.Parse(txbDexTot.Text);
+                tmp.AbiScore[2] = int.Parse(txbConTot.Text);
+                tmp.AbiScore[3] = int.Parse(txbIntTot.Text);
+                tmp.AbiScore[4] = int.Parse(txbWisTot.Text);
+                tmp.AbiScore[5] = int.Parse(txbChaTot.Text);
+                tmp.UpdateAbiMod();
+                // set saves
+                i = 0;
+                foreach (CheckBox cb in rpSaves.Children.OfType<CheckBox>())
+                {
+                    tmp.Saves[i] = (bool)cb.IsChecked;
+                    i++;
+                }
+                // Hitpoints
+                tmp.HpRolls[0] = int.Parse(txbHitPoints.Text);
+                tmp.SetHPMax();
+                tmp.HealthCurr = tmp.HealthMax;
+                // Set Languages
+                i = 0;
+                foreach (CheckBox cb in rpLanguages.Children.OfType<CheckBox>())
+                {
+                    tmp.Languages[i] = (bool)cb.IsChecked;
+                    i++;
+                }
+                // tests
+                var temp = new Windows.UI.Popups.MessageDialog(""+ tmp.HealthMax);
+                await temp.ShowAsync();
             }
         }
     }

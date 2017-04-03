@@ -26,14 +26,16 @@
         <RelativePanel Name="rpBasicInfo" Grid.Column="0" Grid.Row="0" Margin="20">
             <TextBlock Name="txtCharName" Text="Character Name:" Height="50" FontSize="30"/>
             <TextBox Name="txbCharName" RelativePanel.AlignRightWithPanel="True" Width="350" Height="50" FontSize="30"/>
-            <TextBlock Name="txtRace" Text="Race:" Height="50" FontSize="30" RelativePanel.Below="txtCharName" Margin="0,10,0,0"/>
-            <ComboBox Name="cmbRace" RelativePanel.AlignRightWithPanel="True" RelativePanel.Below="txbCharName" Width="350" Height="50" FontSize="30" Margin="0,10,0,0" SelectionChanged="cmbRace_SelectionChanged"/>
+            <TextBlock Name="txtAlignment" Text="Alignment:" RelativePanel.Below="txbCharName" Height="50" FontSize="30" Margin="0,10,0,0"/>
+            <ComboBox Name="cmbAlignment" RelativePanel.AlignRightWithPanel="True" RelativePanel.Below="txbCharName" Width="150" Height="50" FontSize="30" Margin="0,10,0,0"/>
+            <TextBlock Name="txtRace" Text="Race:" Height="50" FontSize="30" RelativePanel.Below="txtAlignment" Margin="0,10,0,0"/>
+            <ComboBox Name="cmbRace" RelativePanel.AlignRightWithPanel="True" RelativePanel.Below="cmbAlignment" Width="350" Height="50" FontSize="30" Margin="0,10,0,0" SelectionChanged="cmbRace_SelectionChanged"/>
             <TextBlock Name="txtClass" Text="Class:" Height="50" FontSize="30" RelativePanel.Below="txtRace" Margin="0,10,0,0"/>
             <ComboBox Name="cmbClass" RelativePanel.AlignRightWithPanel="True" RelativePanel.Below="cmbRace" Width="350" Height="50" FontSize="30" Margin="0,10,0,0" SelectionChanged="cmbClass_SelectionChanged"/>
         </RelativePanel>
         <RelativePanel Grid.Column="0" Grid.Row="1" Name="rpBackground" Margin="20">
             <TextBlock Name="labelBackground" Text="Background" RelativePanel.AlignHorizontalCenterWithPanel="True" FontSize="30"/>
-            <ComboBox Name="cmbBackground" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="labelBackground" Width="350" Height="50" FontSize="30" Margin="0,10,0,0"/>
+            <ComboBox Name="cmbBackground" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="labelBackground" Width="350" Height="50" FontSize="30" Margin="0,10,0,0" SelectionChanged="cmbBackground_SelectionChanged"/>
         </RelativePanel>
 
         <TextBlock Name="lbAbility" Text="Ability Scores" FontSize="30" Margin="0,10,0,0" Grid.Column="1" Grid.ColumnSpan="5" HorizontalAlignment="Center"/>
@@ -81,22 +83,60 @@
             <TextBox Name="txbWisMod" RelativePanel.Below="txbIntMod" TextAlignment="Center" IsReadOnly="True" FontSize="20" />
             <TextBox Name="txbChaMod" RelativePanel.Below="txbWisMod" TextAlignment="Center" IsReadOnly="True" FontSize="20" />
         </RelativePanel>
-        <RelativePanel Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="0" Margin="0,350,0,0">
+        <RelativePanel Name="rpSaves" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="0" Margin="0,350,0,0">
             <TextBlock Name="lbSvProf" Text="Saving Throws" FontSize="30" Margin="0,10,0,0"  RelativePanel.AlignHorizontalCenterWithPanel="True"/>
-            <RadioButton Name="rbStr" Content="Strength" RelativePanel.Below="lbSvProf" Margin="200,10,0,0" Height="32"  Width="120"  IsEnabled="False" Foreground="Black"/>
-            <RadioButton Name="rbDex" Content="Dexterity" RelativePanel.Below="rbStr" Margin="200,10,0,0" Height="32"  Width="120"  IsEnabled="False" Foreground="Black"/>
-            <RadioButton Name="rbCon" Content="Constitution" RelativePanel.Below="rbDex" Margin="200,10,0,0" Height="32"  Width="120"  IsEnabled="False" Foreground="Black"/>
-            <RadioButton Name="rbInt" Content="Intelligence" RelativePanel.Below="lbSvProf" RelativePanel.RightOf="rbStr" Margin="10,10,0,0" Height="32"  Width="120"  IsEnabled="False" Foreground="Black"/>
-            <RadioButton Name="rbWis" Content="Wisdom" RelativePanel.Below="rbInt" RelativePanel.RightOf="rbStr" Margin="10,10,0,0" Height="32"  Width="120"  IsEnabled="False" Foreground="Black"/>
-            <RadioButton Name="rbCha" Content="Charisma" RelativePanel.Below="rbWis" RelativePanel.RightOf="rbStr" Margin="10,10,0,0" Height="32"  Width="120"  IsEnabled="False" Foreground="Black"/>
+            <CheckBox Name="rbStr" Content="Strength" RelativePanel.Below="lbSvProf" Margin="200,10,0,0" Height="32"  Width="120"   Foreground="Black"/>
+            <CheckBox Name="rbDex" Content="Dexterity" RelativePanel.Below="rbStr" Margin="200,10,0,0" Height="32"  Width="120"   Foreground="Black"/>
+            <CheckBox Name="rbCon" Content="Constitution" RelativePanel.Below="rbDex" Margin="200,10,0,0" Height="32"  Width="120"   Foreground="Black"/>
+            <CheckBox Name="rbInt" Content="Intelligence" RelativePanel.Below="lbSvProf" RelativePanel.RightOf="rbStr" Margin="10,10,0,0" Height="32"  Width="120"   Foreground="Black"/>
+            <CheckBox Name="rbWis" Content="Wisdom" RelativePanel.Below="rbInt" RelativePanel.RightOf="rbStr" Margin="10,10,0,0" Height="32"  Width="120"   Foreground="Black"/>
+            <CheckBox Name="rbCha" Content="Charisma" RelativePanel.Below="rbWis" RelativePanel.RightOf="rbStr" Margin="10,10,0,0" Height="32"  Width="120"  Foreground="Black"/>
 
         </RelativePanel>
-        <RelativePanel Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1">
+        <RelativePanel Name="rpSkills"  Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1" Grid.RowSpan="2">
             <TextBlock Name="lbProf" Text="Profiencies" FontSize="30" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
-            
-                
-            
+            <CheckBox Name="cbAcrobatics" Content="Acrobatics" RelativePanel.Below="lbProf" Margin="200,10,0,0"/>
+            <CheckBox Name="cbAnimalHandling" Content="Animal Handling" RelativePanel.Below="cbAcrobatics" Margin="200,10,0,0"/>
+            <CheckBox Name="cbArcana" Content="Arcana" RelativePanel.Below="cbAnimalHandling" Margin="200,10,0,0"/>
+            <CheckBox Name="cbAthletics" Content="Athletics" RelativePanel.Below="cbArcana" Margin="200,10,0,0"/>
+            <CheckBox Name="cbDeception" Content="Deception" RelativePanel.Below="cbAthletics" Margin="200,10,0,0"/>
+            <CheckBox Name="cbHistory" Content="History" RelativePanel.Below="cbDeception" Margin="200,10,0,0"/>
+            <CheckBox Name="cbInsight" Content="Insight" RelativePanel.Below="cbHistory" Margin="200,10,0,0"/>
+            <CheckBox Name="cbIntimidation" Content="Intimidation" RelativePanel.Below="cbInsight" Margin="200,10,0,0"/>
+            <CheckBox Name="cbInvestigation" Content="Investigation" RelativePanel.Below="cbIntimidation"  Margin="200,10,0,0"/>
+            <CheckBox Name="cbMedicine" Content="Medicine" RelativePanel.Below="lbProf" RelativePanel.RightOf="cbAcrobatics" Margin="30,10,0,0"/>
+            <CheckBox Name="cbNature" Content="Nature" RelativePanel.Below="cbMedicine" RelativePanel.RightOf="cbAcrobatics" Margin="30,10,0,0"/>
+            <CheckBox Name="cbPerception" Content="Perception" RelativePanel.Below="cbNature" RelativePanel.RightOf="cbAcrobatics" Margin="30,10,0,0"/>
+            <CheckBox Name="cbPerformance" Content="Performance" RelativePanel.Below="cbPerception" RelativePanel.RightOf="cbAcrobatics" Margin="30,10,0,0"/>
+            <CheckBox Name="cbPersuation" Content="Persuation" RelativePanel.Below="cbPerformance" RelativePanel.RightOf="cbAcrobatics" Margin="30,10,0,0"/>
+            <CheckBox Name="cbReligion" Content="Religion" RelativePanel.Below="cbPersuation" RelativePanel.RightOf="cbAcrobatics" Margin="30,10,0,0"/>
+            <CheckBox Name="cbSleightOfHand" Content="Sleight of Hand" RelativePanel.Below="cbReligion" RelativePanel.RightOf="cbAcrobatics" Margin="30,10,0,0"/>
+            <CheckBox Name="cbStealth" Content="Stealth" RelativePanel.Below="cbSleightOfHand" RelativePanel.RightOf="cbAcrobatics" Margin="30,10,0,0"/>
+            <CheckBox Name="cbSurvival" Content="Survival" RelativePanel.Below="cbStealth" RelativePanel.RightOf="cbAcrobatics" Margin="30,10,0,0"/>
+        </RelativePanel>
+        <RelativePanel Name="rpLanguages" Grid.Column="6" Grid.Row="0">
+            <TextBlock Name="lbLang" Text="Languages" FontSize="30" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+            <TextBlock Name="lbCommon" Text="Common" FontSize="25" RelativePanel.Below="lbLang" Margin="150,10,0,0"/>
+            <CheckBox Name="cbCommon" Content="Common" RelativePanel.Below="lbCommon" Margin="140,10,0,0"/>
+            <CheckBox Name="cbDwarwish" Content="Dwarwish" RelativePanel.Below="cbCommon" Margin="140,5,0,0"/>
+            <CheckBox Name="cbElvish" Content="Elvish" RelativePanel.Below="cbDwarwish" Margin="140,5,0,0"/>
+            <CheckBox Name="cbGiant" Content="Giant" RelativePanel.Below="cbElvish" Margin="140,5,0,0"/>
+            <CheckBox Name="cbGnomish" Content="Gnomish" RelativePanel.Below="cbGiant" Margin="140,5,0,0"/>
+            <CheckBox Name="cbGoblin" Content="Goblin" RelativePanel.Below="cbGnomish" Margin="140,5,0,0"/>
+            <CheckBox Name="cbHalfling" Content="Halfling" RelativePanel.Below="cbGoblin" Margin="140,5,0,0"/>
+            <CheckBox Name="cbOrc" Content="Orcish" RelativePanel.Below="cbHalfling" Margin="140,5,0,0"/>
+
+            <TextBlock Name="lbExotic" Text="Exotic" FontSize="25" RelativePanel.Below="lbLang" Margin="350,10,0,0"/>
+            <CheckBox Name="cbAbyssal" Content="Abyssal" RelativePanel.Below="lbExotic" Margin="340,10,0,0"/>
+            <CheckBox Name="cbCelestial" Content="Celestial" RelativePanel.Below="cbAbyssal" Margin="340,5,0,0"/>
+            <CheckBox Name="cbDraconic" Content="Draconic" RelativePanel.Below="cbCelestial" Margin="340,5,0,0"/>
+            <CheckBox Name="cbDeepSpeech" Content="Deep Speech" RelativePanel.Below="cbDraconic" Margin="340,5,0,0"/>
+            <CheckBox Name="cbInfernal" Content="Infernal" RelativePanel.Below="cbDeepSpeech" Margin="340,5,0,0"/>
+            <CheckBox Name="cbPrimordial" Content="Primordial" RelativePanel.Below="cbInfernal" Margin="340,5,0,0"/>
+            <CheckBox Name="cbSylvan" Content="Sylvan" RelativePanel.Below="cbPrimordial" Margin="340,5,0,0"/>
+            <CheckBox Name="cbUndercommon" Content="Undercommon" RelativePanel.Below="cbSylvan" Margin="340,5,0,0"/>
         </RelativePanel>
         <Button Grid.Row="2" Grid.Column="0" Name="Back" Content="Back to Main Menu" HorizontalAlignment="Center" Height="70" Click="Back_Click"/>
+        <Button Grid.Row="2" Grid.Column="6" Name="bSave" Content="Save Character" HorizontalAlignment="Center" Height="70" Click="bSave_Click"/>
     </Grid>
 </Page>

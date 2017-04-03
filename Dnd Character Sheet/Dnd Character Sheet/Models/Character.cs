@@ -10,7 +10,9 @@ namespace Dnd_Character_Sheet.Models
     {
         // Get other classes into Character
         public Race Race { get; set; }
+        public Subrace Subrace { get; set; }
         public Class Class { get; set; }
+        public string Archetype { get; set; }
         public Background Background { get; set; }
         // Define own variables
         public string Name{ get; set; }
@@ -29,6 +31,7 @@ namespace Dnd_Character_Sheet.Models
                 return abiMod;
             }
         }
+        public bool[] Saves;
         // Skills and profiencies to them
         private int[] skills;               // Needs a method!
 
@@ -39,10 +42,12 @@ namespace Dnd_Character_Sheet.Models
         public bool[] SkillProf { get; set; }
         public bool[] SkillExp { get; set; }
         public bool[] SkillHalfProf { get; set; }
+        public bool[] Languages;
 
         // Health related
         private int healthMax;              // Needs a method!
         public int HealthMax { get { return healthMax; } }
+        public int[] HpRolls;
         private int healthCurr;             // Maybe a method?
         public int HealthCurr
         {
@@ -57,5 +62,36 @@ namespace Dnd_Character_Sheet.Models
             }
         }
         public int HealthTemp { get; set; }
+
+        public Character()
+        {
+            AbiScore = new int[6];
+            abiMod = new int[6];
+            HpRolls = new int[20];
+            Saves = new bool[6];
+            SkillProf = new bool[18];
+            SkillHalfProf = new bool[18];
+            SkillExp = new bool[18];
+            skills = new int[18];
+            Languages = new bool[16];
+        }
+        public void UpdateAbiMod()
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                if (AbiScore[i] >= 10)
+                    abiMod[i] = ((AbiScore[i] - 10) / 2);
+                else
+                    abiMod[i] = ((AbiScore[i] - 11) / 2);
+            }
+        }
+        public void SetHPMax()
+        {
+            healthMax = 0;
+            foreach (int i in HpRolls)
+            {
+                if (i != 0) { healthMax += i + Abimod[2]; }
+            }
+        }
     }
 }
