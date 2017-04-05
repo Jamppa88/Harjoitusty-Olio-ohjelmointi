@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dnd_Character_Sheet.Models
 {
-    class Background
+    public class Background
     {
         public string Name{ get; set; }
         public bool[] SkillProf;

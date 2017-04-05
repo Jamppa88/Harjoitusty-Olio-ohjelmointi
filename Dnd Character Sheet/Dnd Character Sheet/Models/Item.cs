@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dnd_Character_Sheet.Models
 {
-    class Item
+    public class Item
     {
     }
 }

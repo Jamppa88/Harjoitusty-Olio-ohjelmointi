@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dnd_Character_Sheet.Models
 {
-    class Trait
+    public class Trait
     {
         public string Name{ get; set; }
         public string Description{ get; set; }

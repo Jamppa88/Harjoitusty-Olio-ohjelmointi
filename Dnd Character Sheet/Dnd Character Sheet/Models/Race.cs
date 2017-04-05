@@ -4,23 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Dnd_Character_Sheet.Models
 {
-    class Race
+    public class Race
     {
         public string Name{ get; set; }
         public int[] AbiBonus { get; set; }
         public size Size;
         public int BaseSpeed{ get; set; }
         public bool[] Languages;
-        public List<Trait> Traits;
-        public List<Subrace> Subraces;
+        public List<string> Subraces;
         public Race(string name, int str, int dex, int con, int intel, int wis, int cha, int baseSpeed, size size, bool common, bool dwarf, bool elf, bool giant, bool gnome, bool goblin, bool halfling, bool orc, bool abyssal, bool celestial, bool draconic, bool deepSpeech, bool infernal, bool primordial, bool sylvan, bool undercommon)
         {
-            Traits = new List<Trait>();
             Languages = new bool[16];
             AbiBonus = new int[6];
-            Subraces = new List<Subrace>();
+            Subraces = new List<string>();
             Name = name;
             Size = size;
             BaseSpeed = baseSpeed;
@@ -51,21 +50,19 @@ namespace Dnd_Character_Sheet.Models
         }
         public void AddSubrace(Subrace subrace)
         {
-            Subraces.Add(subrace);
+            Subraces.Add(subrace.ToString());
         }
         public override string ToString()
         {
             return Name;
         }
     }
-    class Subrace
+    public class Subrace
     {
         public string Name { get; set; }
         public int[] AbiBonus { get; set; }
-        public List<Trait> Traits;
         public Subrace(string name, int str, int dex, int con, int intel, int wis, int cha)
         {
-            Traits = new List<Trait>();
             AbiBonus = new int[6];
             Name = name;
             AbiBonus[0] = str;

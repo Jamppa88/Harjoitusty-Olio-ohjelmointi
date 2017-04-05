@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Xml;
 
 namespace Dnd_Character_Sheet.Models
 {
-    class Character
+    public class Character
     {
         // Get other classes into Character
-        public Race Race { get; set; }
-        public Subrace Subrace { get; set; }
-        public Class Class { get; set; }
+        public string Race { get; set; }
+        public string Subrace { get; set; }
+        public string Class { get; set; }
+        public alignment Alignment { get; set; }
         public string Archetype { get; set; }
-        public Background Background { get; set; }
+        public string Background { get; set; }
         // Define own variables
         public string Name{ get; set; }
         public int Speed { get; set; }
@@ -62,6 +65,9 @@ namespace Dnd_Character_Sheet.Models
             }
         }
         public int HealthTemp { get; set; }
+        // Features and traits
+        public List<string> Features;
+        public List<string> Traits;
 
         public Character()
         {
@@ -74,7 +80,10 @@ namespace Dnd_Character_Sheet.Models
             SkillExp = new bool[18];
             skills = new int[18];
             Languages = new bool[16];
+            Traits = new List<string>();
+            Features = new List<string>();
         }
+
         public void UpdateAbiMod()
         {
             for (int i = 0; i < 6; i++)

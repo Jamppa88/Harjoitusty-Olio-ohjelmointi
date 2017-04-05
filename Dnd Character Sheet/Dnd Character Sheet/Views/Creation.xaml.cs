@@ -13,6 +13,9 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Dnd_Character_Sheet.Models;
+using System.Xml.Serialization;
+using System.Threading.Tasks;
+
 
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -35,6 +38,7 @@ namespace Dnd_Character_Sheet.Views
             this.Frame.Navigate(typeof(MainPage));
             
         }
+        List<Subrace> Subraces;
         private void InitializeDemo()
         {
             // Demo rodut
@@ -42,6 +46,9 @@ namespace Dnd_Character_Sheet.Views
             Race race = new Race("Human", 1, 1, 1, 1, 1, 1, 30, size.Medium, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
             Races.Add(race);
             race = new Race("Dwarf", 0, 0, 2, 0, 0, 0, 25, size.Medium, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
+            Subraces = new List<Subrace>();
+            Subraces.Add(new Subrace("Mountain Dwarf", 2, 0, 2, 0, 0, 0));
+            Subraces.Add(new Subrace("Hill Dwarf", 0, 0, 2, 0, 1, 0));
             race.AddSubrace(new Subrace("Mountain Dwarf", 2, 0, 2, 0, 0, 0));
             race.AddSubrace(new Subrace("Hill Dwarf", 0, 0, 2, 0, 1, 0));
             Races.Add(race);
@@ -75,7 +82,7 @@ namespace Dnd_Character_Sheet.Views
             
             if (temp.Subraces.Count != 0)
             {
-                cmbSubrace.ItemsSource = temp.Subraces; cmbSubrace.Margin = new Thickness(0, 10, 0, 0);
+                cmbSubrace.ItemsSource = ((Race)cmbRace.SelectedItem).Subraces; cmbSubrace.Margin = new Thickness(0, 10, 0, 0);
                 cmbSubrace.Width = 350; cmbSubrace.Height = 50; cmbSubrace.FontSize = 30;
                 cmbSubrace.SelectionChanged += CmbSubrace_SelectionChanged;
                 RelativePanel.SetAlignRightWithPanel(cmbSubrace, true);
@@ -100,7 +107,7 @@ namespace Dnd_Character_Sheet.Views
 
         private void CmbSubrace_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SetAbilityBonuses((Subrace)cmbSubrace.SelectedItem);
+            SetAbilityBonuses((string)cmbSubrace.SelectedItem);
         }
 
         // Primer for function, Selected a Class
@@ -207,8 +214,9 @@ namespace Dnd_Character_Sheet.Views
             txbWisRac.Text = race.AbiBonus[4].ToString();
             txbChaRac.Text = race.AbiBonus[5].ToString();
         }
-        private void SetAbilityBonuses(Subrace race)
+        private void SetAbilityBonuses(string rc)
         {
+            var race = Subraces.Find(sr => sr.Name == rc);
             txbStrRac.Text = race.AbiBonus[0].ToString();
             txbDexRac.Text = race.AbiBonus[1].ToString();
             txbConRac.Text = race.AbiBonus[2].ToString();
@@ -343,7 +351,7 @@ namespace Dnd_Character_Sheet.Views
                 var temp = new Windows.UI.Popups.MessageDialog("Choose a Class!!!");
                 await temp.ShowAsync();
             }
-            else if (txbHitPoints.Text == null)
+            else if (String.IsNullOrEmpty(txbHitPoints.Text))
             {
                 var temp = new Windows.UI.Popups.MessageDialog("Determine hit points!!!");
                 await temp.ShowAsync();
@@ -351,12 +359,16 @@ namespace Dnd_Character_Sheet.Views
             else
             {
                 Character tmp = new Character();
-                tmp.Race = (Race)cmbRace.SelectedItem;
-                tmp.Subrace = (Subrace)cmbSubrace.SelectedItem;
+                tmp.Race = cmbRace.SelectedItem.ToString();
+                if (((Race)cmbRace.SelectedItem).Subraces.Count != 0)
+                    tmp.Subrace = cmbSubrace.SelectedItem.ToString();
+                else
+                    tmp.Subrace = "";
                 tmp.Name = txbCharName.Text;
-                tmp.Class = (Class)cmbClass.SelectedItem;
+                tmp.Alignment = (alignment)cmbAlignment.SelectedItem;
+                tmp.Class = cmbClass.SelectedItem.ToString();
                 tmp.Archetype = (string)cmbSubclass.SelectedItem;
-                tmp.Background = (Background)cmbBackground.SelectedItem;
+                tmp.Background = cmbBackground.SelectedItem.ToString();
                 tmp.Level = int.Parse(txbLevel.Text);
                 tmp.Speed = ((Race)cmbRace.SelectedItem).BaseSpeed;
                 // Set skill profiencies
@@ -394,9 +406,22 @@ namespace Dnd_Character_Sheet.Views
                     i++;
                 }
                 // tests
-                var temp = new Windows.UI.Popups.MessageDialog(""+ tmp.HealthMax);
+                var xmlData = tmp.ToXml();
+                Trait trait = new Trait();
+                trait.Name = "testi";
+                tmp.Traits.Add(trait.ToString());
+                var temp = new Windows.UI.Popups.MessageDialog(""+ xmlData);
                 await temp.ShowAsync();
+                // Save to File
+                string path = tmp.Name + ".txt";
+                await Task.Run(() => path.SaveToFile(xmlData));
+                temp = new Windows.UI.Popups.MessageDialog("Onnistui?");
+                await temp.ShowAsync();
+                
+                
             }
+
         }
+        
     }
 }
