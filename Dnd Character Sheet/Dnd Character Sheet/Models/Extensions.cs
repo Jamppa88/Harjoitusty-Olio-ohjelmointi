@@ -45,22 +45,27 @@ namespace Dnd_Character_Sheet.Models
             }
         }
 
-        public static async void SaveToFile(this object obj)
+        public static async void SaveToFile(this string data, string fileName, string folder)
         {
-            
-            XmlSerializer xs = new XmlSerializer(obj.GetType());
-            using (StringWriter writer = new StreamWriter())
+            try
             {
-                xs.Serialize(writer, obj);
-
+                StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+                StorageFile saveFile = await storageFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
+                await FileIO.WriteTextAsync(saveFile, data);
+                StorageFolder appFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
+                StorageFolder assets = await appFolder.GetFolderAsync("Assets");
+                var destination = await assets.GetFolderAsync(folder);
+                await saveFile.MoveAsync(destination, fileName, NameCollisionOption.FailIfExists);
+            }catch (Exception ex)
+            {
+                var temp = new Windows.UI.Popups.MessageDialog(ex.Message);
+                await temp.ShowAsync();
             }
-            /*if (Directory.Exists(@"Characters\"))
-                await Task.Run(() =>File.WriteAllText(@"Characters\" + fileName, content));
-            else
-            {
                 
-                await Task.Run(() => File.WriteAllText(@"Characters\" + fileName, content));
-            } */   
+          
+            
+            
+            
             
 
         }

@@ -102,5 +102,9 @@ namespace Dnd_Character_Sheet.Models
                 if (i != 0) { healthMax += i + Abimod[2]; }
             }
         }
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

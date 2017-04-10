@@ -24,9 +24,14 @@ namespace Dnd_Character_Sheet
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public List<Character> chrs;
+        ViewModels.CharacterViewModel chView;
         public MainPage()
         {
             this.InitializeComponent();
+            chView = new ViewModels.CharacterViewModel();
+            Characters.DataContext = chView.Characters;
+            
         }
 
         private void exit_Click(object sender, RoutedEventArgs e)

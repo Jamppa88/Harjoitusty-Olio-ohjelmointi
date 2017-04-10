@@ -405,20 +405,26 @@ namespace Dnd_Character_Sheet.Views
                     tmp.Languages[i] = (bool)cb.IsChecked;
                     i++;
                 }
-                // tests
+                // Create XmlData
                 var xmlData = tmp.ToXml();
-                Trait trait = new Trait();
-                trait.Name = "testi";
-                tmp.Traits.Add(trait.ToString());
-                var temp = new Windows.UI.Popups.MessageDialog(""+ xmlData);
-                await temp.ShowAsync();
+               
                 // Save to File
-                string path = tmp.Name + ".txt";
-                await Task.Run(() => path.SaveToFile(xmlData));
-                temp = new Windows.UI.Popups.MessageDialog("Onnistui?");
-                await temp.ShowAsync();
+                string fileName = tmp.Name + ".xml";
+                try
+                {
+                    await Task.Run(() => xmlData.SaveToFile(fileName, "Characters"));
+                    var temp = new Windows.UI.Popups.MessageDialog("Character saved succesfully!");
+                    await temp.ShowAsync();
+                }catch (Exception ex)
+                {
+                    var temp = new Windows.UI.Popups.MessageDialog("Error occured. (" + ex.Message + ")");
+                    await temp.ShowAsync();
+                }
                 
                 
+                //this.Frame.Navigate(typeof(MainPage));
+
+
             }
 
         }
