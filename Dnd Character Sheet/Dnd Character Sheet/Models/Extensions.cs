@@ -55,11 +55,10 @@ namespace Dnd_Character_Sheet.Models
                 StorageFolder appFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
                 StorageFolder assets = await appFolder.GetFolderAsync("Assets");
                 var destination = await assets.GetFolderAsync(folder);
-                await saveFile.MoveAsync(destination, fileName, NameCollisionOption.FailIfExists);
+                await saveFile.MoveAsync(destination, fileName, NameCollisionOption.ReplaceExisting);
             }catch (Exception ex)
             {
-                var temp = new Windows.UI.Popups.MessageDialog(ex.Message);
-                await temp.ShowAsync();
+                throw ex;
             }
                 
           

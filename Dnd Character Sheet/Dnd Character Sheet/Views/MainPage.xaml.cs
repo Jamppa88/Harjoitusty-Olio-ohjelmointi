@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Dnd_Character_Sheet.Views;
 using Dnd_Character_Sheet.Models;
+using Windows.Storage;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -29,9 +30,16 @@ namespace Dnd_Character_Sheet
         public MainPage()
         {
             this.InitializeComponent();
-            chView = new ViewModels.CharacterViewModel();
-            Characters.DataContext = chView.Characters;
+            InitializeCharacters();
             
+            
+        }
+
+        private void InitializeCharacters()
+        {
+            lsvCharacters.DataContext = null;
+            chView = new ViewModels.CharacterViewModel();
+            lsvCharacters.DataContext = chView.Characters;
         }
 
         private void exit_Click(object sender, RoutedEventArgs e)
@@ -45,5 +53,39 @@ namespace Dnd_Character_Sheet
         }
 
         
+
+        
+
+        private void txtChr_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var tmp = (RelativePanel)sender;
+            txtPuChr.Text = ((TextBlock)tmp.Children[0]).Text;
+            txtPuBase.Text = ((TextBlock)((StackPanel)tmp.Children[1]).Children[0]).Text;
+            txtPuBase.Text += " " + ((TextBlock)((StackPanel)tmp.Children[1]).Children[1]).Text;
+            txtPuBase.Text += " " + ((TextBlock)((StackPanel)tmp.Children[1]).Children[2]).Text;
+            ppup.IsOpen = true;
+            
+        }
+
+        private void btnOpen_Click(object sender, RoutedEventArgs e)
+        {
+            string temp = txtPuChr.Text;
+            CharacterPage.
+            this.Frame.Navigate(typeof(CharacterPage));
+        }
+
+        private async void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            ppup.IsOpen = false;
+            StorageFolder appFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
+            StorageFolder assets = await appFolder.GetFolderAsync("Assets");
+            StorageFolder charFolder = await assets.GetFolderAsync("Characters");
+            StorageFile deleteThis = await charFolder.GetFileAsync(txtPuChr.Text + ".xml");
+            //await deleteThis.MoveAsync(ApplicationData.Current.LocalFolder, "delete_this", NameCollisionOption.ReplaceExisting);
+            await deleteThis.DeleteAsync();
+            var msg = new Windows.UI.Popups.MessageDialog("Character deleted succesfully.");
+            await msg.ShowAsync();
+            InitializeCharacters();
+        }
     }
 }

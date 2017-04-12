@@ -422,7 +422,7 @@ namespace Dnd_Character_Sheet.Views
                 }
                 
                 
-                //this.Frame.Navigate(typeof(MainPage));
+                this.Frame.Navigate(typeof(MainPage));
 
 
             }

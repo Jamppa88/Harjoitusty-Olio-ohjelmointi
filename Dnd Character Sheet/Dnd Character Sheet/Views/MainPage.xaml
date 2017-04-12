@@ -10,12 +10,18 @@
     Width="1920" Height="900" >
     <Page.Resources>
         <DataTemplate x:Key="chrView">
-            <StackPanel>
-                <Button Name="txtChr" Content="{Binding}"/>
-            </StackPanel>
+            <RelativePanel Name="spChr" Background="BurlyWood" Height="350" Width="350" Margin="20,20,20,20" HorizontalAlignment="Left" Tapped="txtChr_Tapped">
+                <TextBlock Name="txtChr" Text="{Binding Name}" RelativePanel.AlignHorizontalCenterWithPanel="True" FontSize="30" Margin="0,100,0,0"/>
+                <StackPanel RelativePanel.Below="txtChr" RelativePanel.AlignHorizontalCenterWithPanel="True" Orientation="Horizontal">
+                    <TextBlock Name="txtRace" Text="{Binding Race}"   FontSize="25" Margin="10,0,0,0"/>
+                    <TextBlock Name="txtClass" Text="{Binding Class}" FontSize="25" Margin="10,0,0,0"/>
+                    <TextBlock Name="txtLevel" Text="{Binding Level}" FontSize="25" Margin="10,0,0,0"/>
+                </StackPanel>
+            </RelativePanel>
         </DataTemplate>
     </Page.Resources>
-        <Grid Background="Beige">
+    
+    <Grid Background="Beige">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="600"/>
@@ -24,9 +30,15 @@
         <StackPanel Grid.Row="0">
             <TextBlock Name="Title" Text="Excelsior Character Sheet For D&amp;D 5th Edition" TextAlignment="Center" FontSize="70" Margin="0,0,0,0" FontFamily="MV Boli"/>
         </StackPanel>
-        <StackPanel Name="Characters" Grid.Row="1">
-            <ListView Name="lsvCharacters" ItemsSource="{Binding}" ItemTemplate="{StaticResource chrView}" />
-            
+        <StackPanel Name="Characters" Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
+            <ListView  Name="lsvCharacters" ItemsSource="{Binding}" ItemTemplate="{StaticResource chrView}" SelectionMode="None" HorizontalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollMode="Enabled">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
+
 
         </StackPanel>
         <StackPanel Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Center">
@@ -34,5 +46,23 @@
             <Button x:Name="create" Content="Create Character"  Click="create_Click" Margin="0,0,0,30" Width="200" Height="50"/>
             <Button x:Name="exit" Content="Exit"  Click="exit_Click" HorizontalAlignment="Center" Width="100" Height="50"/>
         </StackPanel>
+
+        <Popup Name="ppup" Width="500" Height="500" HorizontalAlignment="Center" IsOpen="False" IsLightDismissEnabled="True" Grid.Row="1">
+            <Popup.ChildTransitions>
+                <TransitionCollection>
+                    <EdgeUIThemeTransition Edge="Top"/>
+                </TransitionCollection>
+            </Popup.ChildTransitions>
+            <Grid Width="500" Height="500"  Background="AntiqueWhite" >
+                <RelativePanel>
+                    <TextBlock Name="txtPuChr" Text="" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="0,100,0,0"/>
+                    <TextBlock Name="txtPuBase" Text="" RelativePanel.Below="txtPuChr" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+                    <Button Name="btnDelete" Height="70" Width="100" Content="Delete" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True" Margin="0,0,50,50" Click="btnDelete_Click"/>
+                    <Button Name="btnOpen" Height="70" Width="100" Content="Open" RelativePanel.AlignBottomWithPanel="True" Margin="50,0,0,50" Click="btnOpen_Click"/>
+                </RelativePanel>
+            </Grid>
+        </Popup>
     </Grid>
+    
+    
 </Page>
