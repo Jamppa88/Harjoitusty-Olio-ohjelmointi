@@ -92,7 +92,7 @@ namespace Dnd_Character_Sheet.Models
         {
             StorageFolder insFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
             StorageFolder assets = await insFolder.GetFolderAsync("Assets");
-            await assets.
+            //await assets.
         }
 
     }
