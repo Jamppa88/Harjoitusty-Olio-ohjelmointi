@@ -25,6 +25,11 @@ namespace Dnd_Character_Sheet.Models
             SaveProf[4] = wiSsvProf;
             SaveProf[5] = chaSvProf;
         }
+        public Class()
+        {
+            Archetypes = new List<string>();
+            SaveProf = new bool[6];
+        }
         public void AddArchetype(string archetype)
         {
             Archetypes.Add(archetype);

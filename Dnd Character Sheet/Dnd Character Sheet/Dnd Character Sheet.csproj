@@ -95,6 +95,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\AppStorage.cs" />
     <Compile Include="Models\Extensions.cs" />
     <Compile Include="ViewModels\CharacterViewModel.cs" />
     <Compile Include="Views\CharacterPage.xaml.cs">
@@ -156,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\Characters\" />
+    <Folder Include="Assets\Tables\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

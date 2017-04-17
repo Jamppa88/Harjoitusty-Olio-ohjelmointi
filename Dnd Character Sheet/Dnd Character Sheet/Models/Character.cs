@@ -99,7 +99,13 @@ namespace Dnd_Character_Sheet.Models
             healthMax = 0;
             foreach (int i in HpRolls)
             {
-                if (i != 0) { healthMax += i + Abimod[2]; }
+                if (Abimod[2] > 0) { 
+                    if (i > 0) { healthMax += i + Abimod[2]; }
+                }
+                else
+                {
+                    if (i > 0) { healthMax += i; }
+                }
             }
         }
         public override string ToString()

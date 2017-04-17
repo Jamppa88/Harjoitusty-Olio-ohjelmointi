@@ -68,6 +68,32 @@ namespace Dnd_Character_Sheet.Models
             
 
         }
+        /// <summary>
+        /// Works with Lists of any type
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="fileName"></param>
+        /// <param name="folder"></param>
+        /// <returns></returns>
+        public static async Task<List<T>> ReadFromFile<T>(string fileName, string folder)
+        {
+            
+            StorageFolder insFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
+            StorageFolder assets = await insFolder.GetFolderAsync("Assets");
+            StorageFolder readFolder = await assets.GetFolderAsync(folder);
+            var x = await readFolder.GetFileAsync(fileName);
+            string a = await FileIO.ReadTextAsync(x);
+            List<T> obj = a.FromXml<List<T>>();
+            return obj;
+                
+            
+        }
+        public static async void CreateTables()
+        {
+            StorageFolder insFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
+            StorageFolder assets = await insFolder.GetFolderAsync("Assets");
+            await assets.
+        }
 
     }
 }

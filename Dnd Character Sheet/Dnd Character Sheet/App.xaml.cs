@@ -62,7 +62,7 @@ namespace Dnd_Character_Sheet
                 {
                     //TODO: Load state from previously suspended application
                 }
-                ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize; // !!!!!!! Muuttaa fulscreeniin !!!!!
+                ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.FullScreen; // !!!!!!! Muuttaa fullscreeniin !!!!!
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
             }

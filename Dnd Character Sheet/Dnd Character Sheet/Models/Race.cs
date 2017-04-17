@@ -48,6 +48,12 @@ namespace Dnd_Character_Sheet.Models
             Languages[15] = undercommon;
 
         }
+        public Race()
+        {
+            Languages = new bool[16];
+            AbiBonus = new int[6];
+            Subraces = new List<string>();
+        }
         public void AddSubrace(Subrace subrace)
         {
             Subraces.Add(subrace.ToString());
@@ -71,6 +77,10 @@ namespace Dnd_Character_Sheet.Models
             AbiBonus[3] = intel;
             AbiBonus[4] = wis;
             AbiBonus[5] = cha;
+        }
+        public Subrace()
+        {
+            AbiBonus = new int[6];
         }
         public override string ToString()
         {

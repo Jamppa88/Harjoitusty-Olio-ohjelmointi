@@ -42,7 +42,7 @@ namespace Dnd_Character_Sheet.Views
         private void InitializeDemo()
         {
             // Demo rodut
-            List<Race> Races = new List<Race>();
+            /*List<Race> Races = new List<Race>();
             Race race = new Race("Human", 1, 1, 1, 1, 1, 1, 30, size.Medium, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
             Races.Add(race);
             race = new Race("Dwarf", 0, 0, 2, 0, 0, 0, 25, size.Medium, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
@@ -51,28 +51,43 @@ namespace Dnd_Character_Sheet.Views
             Subraces.Add(new Subrace("Hill Dwarf", 0, 0, 2, 0, 1, 0));
             race.AddSubrace(new Subrace("Mountain Dwarf", 2, 0, 2, 0, 0, 0));
             race.AddSubrace(new Subrace("Hill Dwarf", 0, 0, 2, 0, 1, 0));
-            Races.Add(race);
-            cmbRace.ItemsSource = Races;
-            // Demo luokat
-            List<Class> Classes = new List<Class>();
-            Class cls = new Class("Fighter", "d10", true, false, true, false, false, false);
+            Races.Add(race);*/
+
+            cmbRace.ItemsSource = AppStorage.Races;
+
+            /*string temp = Races.ToXml();
+            await Task.Run(() => temp.SaveToFile("Races.xml", "Tables"));
+            temp = Subraces.ToXml();
+            await Task.Run(() => temp.SaveToFile("Subraces.xml", "Tables"));*/
+            
+            // Demo luokat 
+            //AppStorage.Classes = await Extensions.ReadFromFile<Class>("Classes.xml", "Tables");
+
+            /*Class cls = new Class("Fighter", "d10", true, false, true, false, false, false);
             cls.AddArchetype("Champion");
             Classes.Add(cls);
             cls = new Class("Cleric", "d8", false, false, false, false, true, true);
             cls.AddArchetype("Life");
-            Classes.Add(cls);
-            cmbClass.ItemsSource = Classes;
+            Classes.Add(cls); */
+            cmbClass.ItemsSource = AppStorage.Classes; 
             // Demo Backgroundit
-            List<Background> Backgrounds = new List<Background>();
+            /*List<Background> Backgrounds = new List<Background>();
             Background bck = new Background("Acolyte", false, false, false, false, false, false, true, false,false,false,false,false,false, false, true, false, false, false);
             Backgrounds.Add(bck);
             bck = new Background("Criminal", false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, true, false);
-            Backgrounds.Add(bck);
-            cmbBackground.ItemsSource = Backgrounds;
+            Backgrounds.Add(bck);*/
+
+            cmbBackground.ItemsSource = AppStorage.Backgrounds;
+
+            /*temp = Backgrounds.ToXml();
+            await Task.Run(() => temp.SaveToFile("Backgrounds.xml", "Tables"));*/
+
             // Muut
             List<alignment> ali = new List<alignment>();
             ali.Add(alignment.LG); ali.Add(alignment.NG); ali.Add(alignment.CG); ali.Add(alignment.LN); ali.Add(alignment.N); ali.Add(alignment.CN); ali.Add(alignment.LE); ali.Add(alignment.NE); ali.Add(alignment.CE);
             cmbAlignment.ItemsSource = ali;
+            //string temp = Classes.ToXml();
+            //await Task.Run(() => temp.SaveToFile("Classes.xml", "Tables"));
         }
         // Primer for function, Selected a Race
         ComboBox cmbSubrace = new ComboBox();
@@ -216,7 +231,7 @@ namespace Dnd_Character_Sheet.Views
         }
         private void SetAbilityBonuses(string rc)
         {
-            var race = Subraces.Find(sr => sr.Name == rc);
+            var race = AppStorage.Subraces.Find(sr => sr.Name == rc);
             txbStrRac.Text = race.AbiBonus[0].ToString();
             txbDexRac.Text = race.AbiBonus[1].ToString();
             txbConRac.Text = race.AbiBonus[2].ToString();

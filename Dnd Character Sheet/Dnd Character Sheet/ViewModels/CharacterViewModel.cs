@@ -18,7 +18,7 @@ namespace Dnd_Character_Sheet.ViewModels
         public CharacterViewModel()
         {
             Characters = new ObservableCollection<Character>();
-             GetCharacters();
+            GetCharacters();
             
         }
         async public void GetCharacters()

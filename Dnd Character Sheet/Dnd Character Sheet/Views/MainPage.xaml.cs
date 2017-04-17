@@ -25,13 +25,12 @@ namespace Dnd_Character_Sheet
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        public List<Character> chrs;
         ViewModels.CharacterViewModel chView;
         public MainPage()
         {
             this.InitializeComponent();
             InitializeCharacters();
-            
+            AppStorage.InitializeStorage();
             
         }
 
@@ -70,7 +69,7 @@ namespace Dnd_Character_Sheet
         private void btnOpen_Click(object sender, RoutedEventArgs e)
         {
             string temp = txtPuChr.Text;
-            CharacterPage.
+            //CharacterPage.
             this.Frame.Navigate(typeof(CharacterPage));
         }
 

@@ -35,6 +35,10 @@ namespace Dnd_Character_Sheet.Models
             SkillProf[17] = surv;
 
         }
+        public Background()
+        {
+            SkillProf = new bool[18];
+        }
         public override string ToString()
         {
             return Name;
