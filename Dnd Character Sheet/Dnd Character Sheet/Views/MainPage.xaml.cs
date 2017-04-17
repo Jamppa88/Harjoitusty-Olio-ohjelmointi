@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Navigation;
 using Dnd_Character_Sheet.Views;
 using Dnd_Character_Sheet.Models;
 using Windows.Storage;
+using System.Diagnostics;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -69,7 +70,7 @@ namespace Dnd_Character_Sheet
         private void btnOpen_Click(object sender, RoutedEventArgs e)
         {
             string temp = txtPuChr.Text;
-            //CharacterPage.
+            AppStorage.SelectedCharacter = chView.Characters.Where(x => x.Name == temp).First();
             this.Frame.Navigate(typeof(CharacterPage));
         }
 

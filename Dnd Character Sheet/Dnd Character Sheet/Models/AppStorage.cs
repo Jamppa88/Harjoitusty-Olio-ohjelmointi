@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
 
 namespace Dnd_Character_Sheet.Models
 {
@@ -16,11 +17,23 @@ namespace Dnd_Character_Sheet.Models
 
         public async static void InitializeStorage()
         {
+            StorageFolder insFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
+            StorageFolder assets = await insFolder.GetFolderAsync("Assets");
+            StorageFolder tables = await assets.GetFolderAsync("Tables");
+
+            // Check if need to create tables
+            if (await tables.TryGetItemAsync("Classes.xml") == null || await tables.TryGetItemAsync("Races.xml") == null 
+                || await tables.TryGetItemAsync("Subraces.xml") == null || await tables.TryGetItemAsync("Backgrounds.xml") == null)
+            { Extensions.CreateTables(); }
+
+            // Load .xml-files
             Classes = await Extensions.ReadFromFile<Class>("Classes.xml", "Tables");
             Races = await Extensions.ReadFromFile<Race>("Races.xml", "Tables");
             Subraces = await Extensions.ReadFromFile<Subrace>("Subraces.xml", "Tables");
             Backgrounds = await Extensions.ReadFromFile<Background>("Backgrounds.xml", "Tables");
-            await Task.Run(() => Extensions.CreateTables());
+                
+            
+            
         }
 
     }

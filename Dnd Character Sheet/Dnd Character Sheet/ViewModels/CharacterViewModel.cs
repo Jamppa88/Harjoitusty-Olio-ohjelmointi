@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 using System.IO;
 using Windows.Storage;
-
+using System.Diagnostics;
 
 namespace Dnd_Character_Sheet.ViewModels
 {
@@ -27,8 +27,11 @@ namespace Dnd_Character_Sheet.ViewModels
             StorageFolder assets = await folder.GetFolderAsync("Assets");
             StorageFolder chars = await assets.GetFolderAsync("Characters");
             var x = await chars.GetFilesAsync();
-            foreach (var i in x)
+            
+            foreach (var i in x )
             {
+                if (i.FileType == ".png")
+                    continue;
                 string a = await FileIO.ReadTextAsync(i);
                 Character b = a.FromXml<Character>();
                 this.Characters.Add(b);
