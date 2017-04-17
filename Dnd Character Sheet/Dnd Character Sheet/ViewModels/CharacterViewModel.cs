@@ -1,14 +1,12 @@
-﻿using Dnd_Character_Sheet.Models;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Serialization;
-using System.IO;
 using Windows.Storage;
-using System.Diagnostics;
+
+using Dnd_Character_Sheet.Models;
 
 namespace Dnd_Character_Sheet.ViewModels
 {

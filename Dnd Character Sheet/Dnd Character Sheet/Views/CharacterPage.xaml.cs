@@ -13,6 +13,9 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+using Dnd_Character_Sheet.Models;
+
+
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Dnd_Character_Sheet.Views
@@ -25,6 +28,11 @@ namespace Dnd_Character_Sheet.Views
         public CharacterPage()
         {
             this.InitializeComponent();
+        }
+
+        private void MainMenu_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(MainPage));
         }
     }
 }

@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="using:Dnd_Character_Sheet.Views"
     mc:Ignorable="d"
-    Width="1920" Height="900" >
+    Width="1920" Height="1080" >
     <Page.Resources>
         <DataTemplate x:Key="chrView">
             <RelativePanel Name="spChr" Background="BurlyWood" Height="350" Width="350" Margin="20,20,20,20" HorizontalAlignment="Left" Tapped="txtChr_Tapped">
@@ -31,7 +31,7 @@
             <TextBlock Name="Title" Text="Excelsior Character Sheet For D&amp;D 5th Edition" TextAlignment="Center" FontSize="70" Margin="0,0,0,0" FontFamily="MV Boli"/>
         </StackPanel>
         <StackPanel Name="Characters" Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
-            <ListView  Name="lsvCharacters" ItemsSource="{Binding}" ItemTemplate="{StaticResource chrView}" SelectionMode="None" HorizontalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollMode="Enabled">
+            <ListView  Name="lsvCharacters" ItemsSource="{Binding}" ItemTemplate="{StaticResource chrView}" SelectionMode="None" HorizontalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollMode="Enabled">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal"/>
