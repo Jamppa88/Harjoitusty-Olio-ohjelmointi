@@ -51,19 +51,8 @@ namespace Dnd_Character_Sheet.Models
         private int healthMax;              // Needs a method!
         public int HealthMax { get { return healthMax; } }
         public int[] HpRolls;
-        private int healthCurr;             // Maybe a method?
-        public int HealthCurr
-        {
-            get { return healthCurr; } 
-            set {
-                if (value < 0)
-                    healthCurr = 0;
-                else if (value > healthMax)
-                    healthCurr = healthMax;
-                else
-                    healthCurr = value;
-            }
-        }
+        
+        public int HealthCurr { get; set; }
         public int HealthTemp { get; set; }
         // Features and traits
         public List<string> Features;
@@ -82,6 +71,7 @@ namespace Dnd_Character_Sheet.Models
             Languages = new bool[16];
             Traits = new List<string>();
             Features = new List<string>();
+            
         }
 
         public void UpdateAbiMod()

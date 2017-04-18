@@ -10,20 +10,230 @@
 
     <Grid Background="Beige">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
+            <ColumnDefinition Width="600"/>
             <ColumnDefinition />
             <ColumnDefinition />
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="350"/>
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
+            
+        <!-- Right Menu -->
+        <RelativePanel Grid.Row="1" Grid.RowSpan="4">
+            <!-- Ability Scores and Modifiers -->
+            <StackPanel Name="spAbility">
+                <RelativePanel Name="rpStrength">
+                    <TextBlock Name="lbStr" Text="Strength:" Margin="25,40,0,0" FontFamily="Verdana" FontWeight="Bold"/>
+                    <TextBox Name="txbStrMod" FontFamily="Verdana" Padding="10,20,0,0" FontSize="40" TextAlignment="Left" Text="+5"  Width="100" Height="100" Margin="20,0,0,0" RelativePanel.RightOf="lbStr" CharacterSpacing="10" IsReadOnly="True"/>
+                    <TextBox Name="txbStrScore" FontFamily="Verdana" FontSize="18" TextAlignment="Center" Text="20" Margin="38,-10,0,0" Width="50" Height="25" Canvas.ZIndex="2"  RelativePanel.Below="txbStrMod" RelativePanel.RightOf="lbStr"/>
+                </RelativePanel>
+                <RelativePanel Name="rpDexterity" Margin="0,10,0,0">
+                    <TextBlock Name="lbDex" Text="Dexterity:" Margin="20,40,0,0" FontFamily="Verdana" FontWeight="Bold"/>
+                    <TextBox Name="txbDexMod" FontFamily="Verdana" Padding="10,20,0,0" FontSize="40" TextAlignment="Left" Text="+5"  Width="100" Height="100" Margin="20,0,0,0" RelativePanel.RightOf="lbDex" CharacterSpacing="10" IsReadOnly="True"/>
+                    <TextBox Name="txbDexScore" FontFamily="Verdana" FontSize="18" TextAlignment="Center" Text="20" Margin="38,-10,0,0" Width="50" Height="25" Canvas.ZIndex="2"  RelativePanel.Below="txbDexMod" RelativePanel.RightOf="lbDex"/>
+                </RelativePanel>
+                <RelativePanel Name="rpConstitution" Margin="0,10,0,0">
+                    <TextBlock Name="lbCon" Text="Constitution:" Margin="10,40,0,0" FontFamily="Verdana" FontWeight="Bold"/>
+                    <TextBox Name="txbConMod" FontFamily="Verdana" Padding="10,20,0,0" FontSize="40" TextAlignment="Left" Text="+5"  Width="100" Height="100" Margin="5,0,0,0" RelativePanel.RightOf="lbCon" CharacterSpacing="10" IsReadOnly="True"/>
+                    <TextBox Name="txbConScore" FontFamily="Verdana" FontSize="18" TextAlignment="Center" Text="20" Margin="23,-10,0,0" Width="50" Height="25" Canvas.ZIndex="2"  RelativePanel.Below="txbConMod" RelativePanel.RightOf="lbCon"/>
+                </RelativePanel>
+                <RelativePanel Name="rpIntelligence" Margin="0,10,0,0">
+                    <TextBlock Name="lbInt" Text="Intelligence:" Margin="10,40,0,0" FontFamily="Verdana" FontWeight="Bold"/>
+                    <TextBox Name="txbIntMod" FontFamily="Verdana" Padding="10,20,0,0" FontSize="40" TextAlignment="Left" Text="+5"  Width="100" Height="100" Margin="7,0,0,0" RelativePanel.RightOf="lbInt" CharacterSpacing="10" IsReadOnly="True"/>
+                    <TextBox Name="txbIntScore" FontFamily="Verdana" FontSize="18" TextAlignment="Center" Text="20" Margin="25,-10,0,0" Width="50" Height="25" Canvas.ZIndex="2"  RelativePanel.Below="txbIntMod" RelativePanel.RightOf="lbInt"/>
+                </RelativePanel>
+                <RelativePanel Name="rpWisdom" Margin="0,10,0,0">
+                    <TextBlock Name="lbWis" Text="Wisdom:" Margin="31,40,0,0" FontFamily="Verdana" FontWeight="Bold"/>
+                    <TextBox Name="txbWisMod" FontFamily="Verdana" Padding="10,20,0,0" FontSize="40" TextAlignment="Left" Text="+5"  Width="100" Height="100" Margin="20,0,0,0" RelativePanel.RightOf="lbWis" CharacterSpacing="10" IsReadOnly="True"/>
+                    <TextBox Name="txbWisScore" FontFamily="Verdana" FontSize="18" TextAlignment="Center" Text="20" Margin="38,-10,0,0" Width="50" Height="25" Canvas.ZIndex="2"  RelativePanel.Below="txbWisMod" RelativePanel.RightOf="lbWis"/>
+                </RelativePanel>
+                <RelativePanel Name="rpCharisma" Margin="0,10,0,0">
+                    <TextBlock Name="lbCha" Text="Charisma:" Margin="20,40,0,0" FontFamily="Verdana" FontWeight="Bold"/>
+                    <TextBox Name="txbChaMod" FontFamily="Verdana" Padding="10,20,0,0" FontSize="40" TextAlignment="Left" Text="+5"  Width="100" Height="100" Margin="20,0,0,0" RelativePanel.RightOf="lbCha" CharacterSpacing="10" IsReadOnly="True"/>
+                    <TextBox Name="txbChaScore" FontFamily="Verdana" FontSize="18" TextAlignment="Center" Text="20" Margin="38,-10,0,0" Width="50" Height="25" Canvas.ZIndex="2"  RelativePanel.Below="txbChaMod" RelativePanel.RightOf="lbCha"/>
+                </RelativePanel>
+            </StackPanel>
+            <!-- End of Ability Scores -->
+            
+            <!-- Saving Throws-->
+            <RelativePanel Name="rpSaves" RelativePanel.RightOf="spAbility" Margin="20,0,0,0">
+                <TextBlock Name="lbSaves" Text="Saving Throws" FontWeight="Bold" FontFamily="Verdana" FontSize="20" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+                <RelativePanel Name="rpStrSave" RelativePanel.Below="lbSaves" Margin="0,15,0,0">
+                    <CheckBox Name="cbStrProf" Width="16" Padding="0" MinWidth="20"/>
+                    <TextBox Name="txbStrSave" RelativePanel.RightOf="cbStrProf" MinWidth="32" Margin="10,0,0,0" Text="5" FontWeight="Bold"/>
+                    <TextBlock Name="lbStrSave" Text="Strength" RelativePanel.RightOf="txbStrSave" Margin="10,5,0,0"/>
+                </RelativePanel>
+                <RelativePanel Name="rpDexSave" RelativePanel.Below="rpStrSave" Margin="0,15,0,0" >
+                    <CheckBox Name="cbDexProf" Width="16" Padding="0" MinWidth="20"/>
+                    <TextBox Name="txbDexSave" RelativePanel.RightOf="cbDexProf" MinWidth="32" Margin="10,0,0,0" FontWeight="Bold"/>
+                    <TextBlock Name="lbDexSave" Text="Dexterity" RelativePanel.RightOf="txbDexSave" Margin="10,5,0,0"/>
+                </RelativePanel>
+                <RelativePanel Name="rpConSave" RelativePanel.Below="rpDexSave" Margin="0,15,0,0">
+                    <CheckBox Name="cbConProf" Width="16" Padding="0" MinWidth="20"/>
+                    <TextBox Name="txbConSave" RelativePanel.RightOf="cbConProf" MinWidth="32" Margin="10,0,0,0" FontWeight="Bold"/>
+                    <TextBlock Name="lbConSave" Text="Constitution" RelativePanel.RightOf="txbConSave" Margin="10,5,0,0"/>
+                </RelativePanel>
+                <RelativePanel Name="rpIntSave" RelativePanel.Below="lbSaves" RelativePanel.RightOf="rpConSave" Margin="15,15,0,0">
+                    <CheckBox Name="cbIntProf" Width="16" Padding="0" MinWidth="20"/>
+                    <TextBox Name="txbIntSave" RelativePanel.RightOf="cbIntProf" MinWidth="32" Margin="10,0,0,0" FontWeight="Bold"/>
+                    <TextBlock Name="lbIntSave" Text="Intelligence" RelativePanel.RightOf="txbIntSave" Margin="10,5,0,0"/>
+                </RelativePanel>
+                <RelativePanel Name="rpWisSave" RelativePanel.Below="rpIntSave" RelativePanel.RightOf="rpConSave" Margin="15,15,0,0">
+                    <CheckBox Name="cbWisProf" Width="16" Padding="0" MinWidth="20"/>
+                    <TextBox Name="txbWisSave" RelativePanel.RightOf="cbWisProf" MinWidth="32" Margin="10,0,0,0" FontWeight="Bold"/>
+                    <TextBlock Name="lbWisSave" Text="Wisdom" RelativePanel.RightOf="txbWisSave" Margin="10,5,0,0"/>
+                </RelativePanel>
+                <RelativePanel Name="rpChaSave" RelativePanel.Below="rpWisSave" RelativePanel.RightOf="rpConSave" Margin="15,15,0,0">
+                    <CheckBox Name="cbChaProf" Width="16" Padding="0" MinWidth="20"/>
+                    <TextBox Name="txbChaSave" RelativePanel.RightOf="cbChaProf" MinWidth="32" Margin="10,0,0,0" FontWeight="Bold"/>
+                    <TextBlock Name="lbChaSave" Text="Charisma" RelativePanel.RightOf="txbChaSave" Margin="10,5,0,0"/>
+                </RelativePanel>
+            </RelativePanel>
+            <!-- End of Saving Throws -->
+            
+            <!-- Skills and profiencies -->
+            <RelativePanel Name="rpSkills" RelativePanel.Below="rpSaves" RelativePanel.RightOf="spAbility" Width="337">
+                <TextBlock Name="lbSkills" Text="Skills" FontWeight="Bold" FontFamily="Verdana" FontSize="20" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+                <RelativePanel Name="rpAcrobatics" RelativePanel.Below="lbSkills" Margin="80,10,0,0">
+                    <CheckBox Name="cbAcroProf" Width="16" Padding="0" MinWidth="20"/>
+                    <TextBox Name="txbAcroScore" RelativePanel.RightOf="cbAcroProf" MinWidth="32" Margin="10,0,0,0" FontWeight="Bold"/>
+                    <TextBlock Name="lbAcrobatics" Text="Acrobatics (Dex)" RelativePanel.RightOf="txbAcroScore" Margin="10,5,0,0"/>
+                </RelativePanel>
+                <RelativePanel Name="rpAnimalHandling" RelativePanel.Below="rpAcrobatics" Margin="80,10,0,0">
+                    <CheckBox Name="cbAnimProf" Width="16" Padding="0" MinWidth="20"/>
+                    <TextBox Name="txbAnimScore" RelativePanel.RightOf="cbAnimProf" MinWidth="32" Margin="10,0,0,0" FontWeight="Bold"/>
+                    <TextBlock Name="lbAnimalHandling" Text="Animal Handling (Wis)" RelativePanel.RightOf="txbAnimScore" Margin="10,5,0,0"/>
+                </RelativePanel>
+                <RelativePanel Name="rpArcana" RelativePanel.Below="rpAnimalHandling" Margin="80,10,0,0">
+                    <CheckBox Name="cbArcaProf" Width="16" Padding="0" MinWidth="20"/>
+                    <TextBox Name="txbArcaScore" RelativePanel.RightOf="cbArcaProf" MinWidth="32" Margin="10,0,0,0" FontWeight="Bold"/>
+                    <TextBlock Name="lbArcana" Text="Arcana (Int)" RelativePanel.RightOf="txbArcaScore" Margin="10,5,0,0"/>
+                </RelativePanel>
+                <RelativePanel Name="rpAthletics" RelativePanel.Below="rpArcana" Margin="80,10,0,0">
+                    <CheckBox Name="cbAthlProf" Width="16" Padding="0" MinWidth="20"/>
+                    <TextBox Name="txbAthlScore" RelativePanel.RightOf="cbAthlProf" MinWidth="32" Margin="10,0,0,0" FontWeight="Bold"/>
+                    <TextBlock Name="lbAthletics" Text="Athletics (Str)" RelativePanel.RightOf="txbAthlScore" Margin="10,5,0,0"/>
+                </RelativePanel>
+                <RelativePanel Name="rpDeception" RelativePanel.Below="rpAthletics" Margin="80,10,0,0">
+                    <CheckBox Name="cbDeceProf" Width="16" Padding="0" MinWidth="20"/>
+                    <TextBox Name="txbDeceScore" RelativePanel.RightOf="cbDeceProf" MinWidth="32" Margin="10,0,0,0" FontWeight="Bold"/>
+                    <TextBlock Name="lbDeception" Text="Deception (Cha)" RelativePanel.RightOf="txbDeceScore" Margin="10,5,0,0"/>
+                </RelativePanel>
+                <RelativePanel Name="rpHistory" RelativePanel.Below="rpDeception" Margin="80,10,0,0">
+                    <CheckBox Name="cbHistProf" Width="16" Padding="0" MinWidth="20"/>
+                    <TextBox Name="txbHistScore" RelativePanel.RightOf="cbHistProf" MinWidth="32" Margin="10,0,0,0" FontWeight="Bold"/>
+                    <TextBlock Name="lbHistory" Text="History (Int)" RelativePanel.RightOf="txbHistScore" Margin="10,5,0,0"/>
+                </RelativePanel>
+                <RelativePanel Name="rpInsight" RelativePanel.Below="rpHistory" Margin="80,10,0,0">
+                    <CheckBox Name="cbInsiProf" Width="16" Padding="0" MinWidth="20"/>
+                    <TextBox Name="txbInsiScore" RelativePanel.RightOf="cbInsiProf" MinWidth="32" Margin="10,0,0,0" FontWeight="Bold"/>
+                    <TextBlock Name="lbInsight" Text="Insight (Wis)" RelativePanel.RightOf="txbInsiScore" Margin="10,5,0,0"/>
+                </RelativePanel>
+                <RelativePanel Name="rpIntimidation" RelativePanel.Below="rpInsight" Margin="80,10,0,0">
+                    <CheckBox Name="cbIntiProf" Width="16" Padding="0" MinWidth="20"/>
+                    <TextBox Name="txbIntiScore" RelativePanel.RightOf="cbIntiProf" MinWidth="32" Margin="10,0,0,0" FontWeight="Bold"/>
+                    <TextBlock Name="lbIntimidation" Text="Intimidation (Cha)" RelativePanel.RightOf="txbIntiScore" Margin="10,5,0,0"/>
+                </RelativePanel>
+                <RelativePanel Name="rpInvestigation" RelativePanel.Below="rpIntimidation" Margin="80,10,0,0">
+                    <CheckBox Name="cbInveProf" Width="16" Padding="0" MinWidth="20"/>
+                    <TextBox Name="txbInveScore" RelativePanel.RightOf="cbInveProf" MinWidth="32" Margin="10,0,0,0" FontWeight="Bold"/>
+                    <TextBlock Name="lbInvestigation" Text="Investigation (Int)" RelativePanel.RightOf="txbInveScore" Margin="10,5,0,0"/>
+                </RelativePanel>
+                <RelativePanel Name="rpMedicine" RelativePanel.Below="rpInvestigation" Margin="80,10,0,0">
+                    <CheckBox Name="cbMediProf" Width="16" Padding="0" MinWidth="20"/>
+                    <TextBox Name="txbMediScore" RelativePanel.RightOf="cbMediProf" MinWidth="32" Margin="10,0,0,0" FontWeight="Bold"/>
+                    <TextBlock Name="lbMedicine" Text="Medicine (Wis)" RelativePanel.RightOf="txbMediScore" Margin="10,5,0,0"/>
+                </RelativePanel>
+                <RelativePanel Name="rpNature" RelativePanel.Below="rpMedicine" Margin="80,10,0,0">
+                    <CheckBox Name="cbNatuProf" Width="16" Padding="0" MinWidth="20"/>
+                    <TextBox Name="txbNatuScore" RelativePanel.RightOf="cbNatuProf" MinWidth="32" Margin="10,0,0,0" FontWeight="Bold"/>
+                    <TextBlock Name="lbNature" Text="Nature (Int)" RelativePanel.RightOf="txbNatuScore" Margin="10,5,0,0"/>
+                </RelativePanel>
+                <RelativePanel Name="rpPerception" RelativePanel.Below="rpNature" Margin="80,10,0,0">
+                    <CheckBox Name="cbPercProf" Width="16" Padding="0" MinWidth="20"/>
+                    <TextBox Name="txbPercScore" RelativePanel.RightOf="cbPercProf" MinWidth="32" Margin="10,0,0,0" FontWeight="Bold"/>
+                    <TextBlock Name="lbPerception" Text="Perception (Wis)" RelativePanel.RightOf="txbPercScore" Margin="10,5,0,0"/>
+                </RelativePanel>
+                <RelativePanel Name="rpPerformance" RelativePanel.Below="rpPerception" Margin="80,10,0,0">
+                    <CheckBox Name="cbPerfProf" Width="16" Padding="0" MinWidth="20"/>
+                    <TextBox Name="txbPerfScore" RelativePanel.RightOf="cbPerfProf" MinWidth="32" Margin="10,0,0,0" FontWeight="Bold"/>
+                    <TextBlock Name="lbPerformance" Text="Performance (Cha)" RelativePanel.RightOf="txbPerfScore" Margin="10,5,0,0"/>
+                </RelativePanel>
+                <RelativePanel Name="rpPersuation" RelativePanel.Below="rpPerformance" Margin="80,10,0,0">
+                    <CheckBox Name="cbPersProf" Width="16" Padding="0" MinWidth="20"/>
+                    <TextBox Name="txbPersScore" RelativePanel.RightOf="cbPersProf" MinWidth="32" Margin="10,0,0,0" FontWeight="Bold"/>
+                    <TextBlock Name="lbPersuation" Text="Persuation (Cha)" RelativePanel.RightOf="txbPersScore" Margin="10,5,0,0"/>
+                </RelativePanel>
+                <RelativePanel Name="rpReligion" RelativePanel.Below="rpPersuation" Margin="80,10,0,0">
+                    <CheckBox Name="cbReliProf" Width="16" Padding="0" MinWidth="20"/>
+                    <TextBox Name="txbReliScore" RelativePanel.RightOf="cbReliProf" MinWidth="32" Margin="10,0,0,0" FontWeight="Bold"/>
+                    <TextBlock Name="lbReligion" Text="Religion (Int)" RelativePanel.RightOf="txbReliScore" Margin="10,5,0,0"/>
+                </RelativePanel>
+                <RelativePanel Name="rpSleightOfHand" RelativePanel.Below="rpReligion" Margin="80,10,0,0">
+                    <CheckBox Name="cbSleiProf" Width="16" Padding="0" MinWidth="20"/>
+                    <TextBox Name="txbSleiScore" RelativePanel.RightOf="cbSleiProf" MinWidth="32" Margin="10,0,0,0" FontWeight="Bold"/>
+                    <TextBlock Name="lbSleightOfHand" Text="SleightOfHand (Dex)" RelativePanel.RightOf="txbSleiScore" Margin="10,5,0,0"/>
+                </RelativePanel>
+                <RelativePanel Name="rpStealth" RelativePanel.Below="rpSleightOfHand" Margin="80,10,0,0">
+                    <CheckBox Name="cbSteaProf" Width="16" Padding="0" MinWidth="20"/>
+                    <TextBox Name="txbSteaScore" RelativePanel.RightOf="cbSteaProf" MinWidth="32" Margin="10,0,0,0" FontWeight="Bold"/>
+                    <TextBlock Name="lbStealth" Text="Stealth (Dex)" RelativePanel.RightOf="txbSteaScore" Margin="10,5,0,0"/>
+                </RelativePanel>
+                <RelativePanel Name="rpSurvival" RelativePanel.Below="rpStealth" Margin="80,10,0,0">
+                    <CheckBox Name="cbSurvProf" Width="16" Padding="0" MinWidth="20"/>
+                    <TextBox Name="txbSurvScore" RelativePanel.RightOf="cbSurvProf" MinWidth="32" Margin="10,0,0,0" FontWeight="Bold"/>
+                    <TextBlock Name="lbSurvival" Text="Survival (Wis)" RelativePanel.RightOf="txbSurvScore" Margin="10,5,0,0"/>
+                </RelativePanel>
+            </RelativePanel>
+            <!-- End of Skills -->
+        </RelativePanel>
+        <!-- End of Right Menu -->
 
-        <Button Name="MainMenu" Content="Return to Main Menu" Click="MainMenu_Click" />
+        <!-- Middle Menu -->
+        <RelativePanel Name="rpMiddleMenu" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="2">
+            <TextBlock Name="txtName" Text="Name" FontSize="40" FontFamily="Verdana" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+            <TextBlock Name="txtCRL" Text="Human Paladin 1" FontSize="30" FontFamily="Verdana" RelativePanel.Below="txtName" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+            <!-- Base Stats -->
+            <RelativePanel Name="rpBaseStats" RelativePanel.Below="txtCRL" Margin="0,15,0,0">
+                <StackPanel Name="spProficiency">
+                    <TextBlock Name="lbProficiency" Text="Proficiency Bonus" FontWeight="Bold" FontFamily="Verdana" />
+                    <TextBox Name="txbProficiency"  FontFamily="Verdana" Padding="35,20,0,0" FontSize="40" TextAlignment="Left" Text="2"  Width="100" Height="100" Margin="0,10,0,0"  CharacterSpacing="10" IsReadOnly="True" Foreground="#FFB101F3" FontWeight="SemiBold"/>
+                </StackPanel>
+                <StackPanel Name="spInitiative" RelativePanel.RightOf="spProficiency" Margin="20,0,0,0">
+                    <TextBlock Name="lbInitiative" Text="Initiative" FontWeight="Bold" FontFamily="Verdana" HorizontalAlignment="Center"/>
+                    <TextBox Name="txbInitiative"  FontFamily="Verdana" Padding="0,20,0,0" FontSize="40" TextAlignment="Center" Text="2"  Width="100" Height="100" Margin="0,10,0,0"  CharacterSpacing="10" IsReadOnly="True" Foreground="#FF141DE6"/>
+                </StackPanel>
+                <StackPanel Name="spArmorClass" RelativePanel.RightOf="spInitiative" Margin="40,0,0,0">
+                    <TextBlock Name="lbArmorClass" Text="Armor Class" FontWeight="Bold" FontFamily="Verdana" HorizontalAlignment="Center"/>
+                    <TextBox Name="txbArmorClass"  FontFamily="Verdana" Padding="0,20,0,0" FontSize="40" TextAlignment="Center" Text="20"  Width="100" Height="100" Margin="0,10,0,0"  CharacterSpacing="10" IsReadOnly="True"/>
+                </StackPanel>
+            </RelativePanel>
+            <!-- End of Base Stats -->
+            
+            <!-- Health Panel -->
+            <RelativePanel Name="rpHealth" RelativePanel.Below="rpBaseStats">
+                
+                <StackPanel Name="spHealthMax"  Margin="30,20,0,0">
+                    <TextBlock Name="lbHealthMax" Text="Max Health" FontWeight="Bold" FontFamily="Verdana" HorizontalAlignment="Center"/>
+                    <TextBox Name="txbHealthMax"  FontFamily="Verdana" Padding="0,10,0,0" FontSize="40" TextAlignment="Center" Text="20"  Width="100" Height="80" Margin="0,10,0,0"  CharacterSpacing="10" IsReadOnly="True"/>
+                </StackPanel>
+                <StackPanel Name="spHealthCurr"  Margin="30,20,0,0" RelativePanel.RightOf="spHealthMax">
+                    <TextBlock Name="lbHealthCurr" Text="Current Health" FontWeight="Bold" FontFamily="Verdana" HorizontalAlignment="Center"/>
+                    <TextBox Name="txbHealthCurr"  FontFamily="Verdana" Padding="0,10,0,0" FontSize="40" TextAlignment="Center" Text="20"  Width="100" Height="80" Margin="0,10,0,0"  CharacterSpacing="10" />
+                </StackPanel>
+                <StackPanel Name="spHealthTemp"  Margin="30,20,0,0" RelativePanel.RightOf="spHealthCurr">
+                    <TextBlock Name="lbHealthTemp" Text="Temp Health" FontWeight="Bold" FontFamily="Verdana" HorizontalAlignment="Center"/>
+                    <TextBox Name="txbHealthTemp" FontFamily="Verdana" Padding="0,10,0,0" FontSize="40" TextAlignment="Center" Text="0"  Width="100" Height="80" Margin="0,10,0,0"  CharacterSpacing="10" Foreground="#FFF10909" />
+                </StackPanel>
+            </RelativePanel>
+            <!-- End of Health Panel -->
+        </RelativePanel>
+        <Button Name="MainMenu" Content="Return to Main Menu" Click="MainMenu_Click" Grid.Row="4"/>
     </Grid>
 </Page>

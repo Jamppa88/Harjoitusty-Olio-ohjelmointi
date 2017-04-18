@@ -35,6 +35,19 @@ namespace Dnd_Character_Sheet.Models
             
             
         }
+        public static int GetProfiency()
+        {
+            if (SelectedCharacter.Level < 5)
+                return  2;
+            else if (SelectedCharacter.Level < 9)
+                return 3;
+            else if (SelectedCharacter.Level < 13)
+                return 4;
+            else if (SelectedCharacter.Level < 17)
+                return 5;
+            else 
+                return 6;
+        }
 
     }
 }
