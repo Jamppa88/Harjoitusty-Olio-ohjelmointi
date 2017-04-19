@@ -28,7 +28,7 @@ namespace Dnd_Character_Sheet.ViewModels
             
             foreach (var i in x )
             {
-                if (i.FileType == ".png")
+                if (i.FileType != ".xml")
                     continue;
                 string a = await FileIO.ReadTextAsync(i);
                 Character b = a.FromXml<Character>();

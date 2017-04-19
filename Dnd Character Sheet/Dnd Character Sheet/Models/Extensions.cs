@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -31,17 +32,18 @@ namespace Dnd_Character_Sheet.Models
             }
         }
 
-        public static async Task<Exception> SaveToFile(this string data, string fileName, string folder)
+        public static async Task<Exception> SaveToFile(this string data, string fileName, string folder, NameCollisionOption nco)
         {
             try
             {
+                
                 StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
                 StorageFile saveFile = await storageFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
                 await FileIO.WriteTextAsync(saveFile, data);
                 StorageFolder appFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
                 StorageFolder assets = await appFolder.GetFolderAsync("Assets");
                 var destination = await assets.GetFolderAsync(folder);
-                await saveFile.MoveAsync(destination, fileName, NameCollisionOption.FailIfExists);
+                await saveFile.MoveAsync(destination, fileName, nco);
                 return null;
             }catch (Exception ex)
             {
@@ -75,14 +77,9 @@ namespace Dnd_Character_Sheet.Models
                 
             
         }
-        public static async void CreateTables()
+        public static async Task CreateTables()
         {
-            /// Getting Assets-folder
             
-            /// Getting local folder
-            
-
-            /// Prime instances
             // Demo rodut
             List<Subrace> Subraces;
             List<Race> Races = new List<Race>();
@@ -99,10 +96,10 @@ namespace Dnd_Character_Sheet.Models
             
 
             string temp = Races.ToXml();
-            await Task.Run(() => temp.SaveToFile("Races.xml", "Tables"));
+            await Task.Run(() => temp.SaveToFile("Races.xml", "Tables", NameCollisionOption.ReplaceExisting));
             temp = Subraces.ToXml();
-            await Task.Run(() => temp.SaveToFile("Subraces.xml", "Tables"));
-
+            await Task.Run(() => temp.SaveToFile("Subraces.xml", "Tables", NameCollisionOption.ReplaceExisting));
+            Debug.WriteLine("Races done");
             // Demo luokat 
             List<Class> Classes = new List<Class>();
 
@@ -114,8 +111,8 @@ namespace Dnd_Character_Sheet.Models
             Classes.Add(cls);
 
             temp = Classes.ToXml();
-            await Task.Run(() => temp.SaveToFile("Classes.xml", "Tables"));
-
+            await Task.Run(() => temp.SaveToFile("Classes.xml", "Tables", NameCollisionOption.ReplaceExisting));
+            Debug.WriteLine("Classes done");
             // Demo Backgroundit
             List<Background> Backgrounds = new List<Background>();
             Background bck = new Background("Acolyte", false, false, false, false, false, false, true, false,false,false,false,false,false, false, true, false, false, false);
@@ -126,9 +123,9 @@ namespace Dnd_Character_Sheet.Models
             
 
             temp = Backgrounds.ToXml();
-            await Task.Run(() => temp.SaveToFile("Backgrounds.xml", "Tables"));
+            await Task.Run(() => temp.SaveToFile("Backgrounds.xml", "Tables", NameCollisionOption.ReplaceExisting));
+            Debug.WriteLine("Backgrounds done");
 
-            
 
         }
 

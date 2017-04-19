@@ -427,7 +427,7 @@ namespace Dnd_Character_Sheet.Views
                 string fileName = tmp.Name + ".xml";
                 try
                 {
-                    await Task.Run(() => xmlData.SaveToFile(fileName, "Characters"));
+                    await Task.Run(() => xmlData.SaveToFile(fileName, "Characters", Windows.Storage.NameCollisionOption.FailIfExists));
                     var temp = new Windows.UI.Popups.MessageDialog("Character saved succesfully!");
                     await temp.ShowAsync();
                 }catch (Exception ex)

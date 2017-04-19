@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,9 +23,13 @@ namespace Dnd_Character_Sheet.Models
             StorageFolder tables = await assets.GetFolderAsync("Tables");
 
             // Check if need to create tables
+            Debug.WriteLine("Checking tables...");
             if (await tables.TryGetItemAsync("Classes.xml") == null || await tables.TryGetItemAsync("Races.xml") == null 
                 || await tables.TryGetItemAsync("Subraces.xml") == null || await tables.TryGetItemAsync("Backgrounds.xml") == null)
-            { Extensions.CreateTables(); }
+            {
+                Debug.Write("Writing tables");
+                await Extensions.CreateTables();
+            }
 
             // Load .xml-files
             Classes = await Extensions.ReadFromFile<Class>("Classes.xml", "Tables");
