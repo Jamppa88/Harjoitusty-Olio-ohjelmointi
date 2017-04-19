@@ -31,7 +31,7 @@ namespace Dnd_Character_Sheet.Models
             }
         }
 
-        public static async void SaveToFile(this string data, string fileName, string folder)
+        public static async Task<Exception> SaveToFile(this string data, string fileName, string folder)
         {
             try
             {
@@ -41,10 +41,11 @@ namespace Dnd_Character_Sheet.Models
                 StorageFolder appFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
                 StorageFolder assets = await appFolder.GetFolderAsync("Assets");
                 var destination = await assets.GetFolderAsync(folder);
-                await saveFile.MoveAsync(destination, fileName, NameCollisionOption.ReplaceExisting);
+                await saveFile.MoveAsync(destination, fileName, NameCollisionOption.FailIfExists);
+                return null;
             }catch (Exception ex)
             {
-                throw ex;
+                return ex;
             }
                 
           

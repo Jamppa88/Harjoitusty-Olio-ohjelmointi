@@ -38,6 +38,7 @@ namespace Dnd_Character_Sheet.Views
         private void InitializeCharacter()
         {
             AppStorage.SelectedCharacter.UpdateAbiMod();
+            AppStorage.SelectedCharacter.SetHPMax();
             var temp = AppStorage.SelectedCharacter;
             
             txtName.Text = temp.Name;
@@ -83,7 +84,7 @@ namespace Dnd_Character_Sheet.Views
             cbSteaProf.IsChecked = temp.SkillProf[16];
             cbSurvProf.IsChecked = temp.SkillProf[17];
             // Health
-            txbHealthMax.Text = CalcMaxHealth().ToString();
+            txbHealthMax.Text = temp.HealthMax.ToString();
             txbHealthCurr.Text = temp.HealthCurr.ToString();
             txbHealthTemp.Text = temp.HealthTemp.ToString();
             // Profiency bonus and Initiative
@@ -93,24 +94,7 @@ namespace Dnd_Character_Sheet.Views
             CalcSavesAndSkills();
 
         }
-        private int CalcMaxHealth()
-        {
-            int result = 0;
-            foreach (var roll in AppStorage.SelectedCharacter.HpRolls)
-            {
-                if (roll == 0)
-                    continue;
-                else if (AppStorage.SelectedCharacter.Abimod[2] > 0)
-                {
-                    result += roll + AppStorage.SelectedCharacter.Abimod[2];
-                }else
-                {
-                    result += roll;
-                }
-                
-            }
-            return result;
-        }
+        
         private void CalcSavesAndSkills()
         {
             int i = 0;
@@ -145,7 +129,7 @@ namespace Dnd_Character_Sheet.Views
                 }
             }
         }
-        private int GetAppropriateMod(TextBlock txt)
+        private int GetAppropriateMod(TextBlock txt) // Selecting appropriate modifier for a skill
         {
             if (txt.Text.Contains("Str"))
                 return AppStorage.SelectedCharacter.Abimod[0];

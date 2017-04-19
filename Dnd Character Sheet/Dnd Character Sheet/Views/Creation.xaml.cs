@@ -38,7 +38,7 @@ namespace Dnd_Character_Sheet.Views
             this.Frame.Navigate(typeof(MainPage));
             
         }
-        List<Subrace> Subraces;
+        
         private void InitializeDemo()
         {
             // Demo rodut

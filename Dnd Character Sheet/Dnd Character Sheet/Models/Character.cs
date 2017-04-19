@@ -22,8 +22,7 @@ namespace Dnd_Character_Sheet.Models
         public int Speed { get; set; }
         public int Level { get; set; }
         public int Exp { get; set; }
-        private int profiency;              // Needs a method!
-        public int Profiency { get { return profiency; } }
+        
         // Ability scores and related
         public int[] AbiScore { get; set; }
         private int[] abiMod;               // Needs a method!
@@ -87,15 +86,19 @@ namespace Dnd_Character_Sheet.Models
         public void SetHPMax()
         {
             healthMax = 0;
-            foreach (int i in HpRolls)
+            foreach (var roll in HpRolls)
             {
-                if (Abimod[2] > 0) { 
-                    if (i > 0) { healthMax += i + Abimod[2]; }
+                if (roll == 0)
+                    continue;
+                else if (Abimod[2] > 0)
+                {
+                    healthMax += roll + Abimod[2];
                 }
                 else
                 {
-                    if (i > 0) { healthMax += i; }
+                    healthMax += roll;
                 }
+
             }
         }
         public override string ToString()
