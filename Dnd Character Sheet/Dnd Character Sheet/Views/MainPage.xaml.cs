@@ -82,7 +82,7 @@ namespace Dnd_Character_Sheet
                 StorageFolder assets = await appFolder.GetFolderAsync("Assets");
                 StorageFolder charFolder = await assets.GetFolderAsync("Characters");
                 StorageFile deleteThis = await charFolder.GetFileAsync(txtPuChr.Text + ".xml");
-                //await deleteThis.MoveAsync(ApplicationData.Current.LocalFolder, "delete_this", NameCollisionOption.ReplaceExisting);
+              
                 await deleteThis.DeleteAsync();
                 var msg = new Windows.UI.Popups.MessageDialog("Character deleted succesfully.");
                 await msg.ShowAsync();
